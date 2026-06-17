@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SK 3 — Simple Navigation Demo</title>
+    <link rel="stylesheet" href="sk3-styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="#home">Saiket</a>
+        <nav class="main-nav" aria-label="Primary">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="primary-nav">☰</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="section hero">
+        <div class="container">
+          <h1>Welcome to the Navigation Demo</h1>
+          <p>Use the menu to jump between sections. This demonstrates basic links and styling.</p>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="container">
+          <h2>About</h2>
+          <p>Simple page showing internal anchors and clear navigation structure.</p>
+        </div>
+      </section>
+
+      <section id="services" class="section">
+        <div class="container">
+          <h2>Services</h2>
+          <p>Examples of menu links that take users to important content quickly.</p>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="container">
+          <h2>Contact</h2>
+          <p>Contact information or a simple form could go here.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">© 2026 Saiket — SK 3 Navigation</div>
+    </footer>
+
+    <script>
+      // Small menu toggle for small screens
+      const toggle = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('.main-nav');
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        nav.classList.toggle('open');
+      });
+    </script>
+  </body>
+</html>
