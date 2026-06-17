@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio | Saiket Ass</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#home" class="brand">Saiket</a>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          🌙
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Full-Stack Web Designer</p>
+            <h1>Building modern digital experiences with HTML, CSS, and JavaScript.</h1>
+            <p class="hero-text">
+              I design polished, responsive websites and interactive user
+              interfaces that help businesses tell their story and convert
+              visitors into customers.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#projects">View Work</a>
+              <a class="btn btn-secondary" href="#contact">Let's Talk</a>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="info-card">
+              <h2>Featured Achievements</h2>
+              <ul>
+                <li>Designed 10+ responsive websites</li>
+                <li>Improved UX conversion for product launches</li>
+                <li>Delivered animation-rich interfaces with JavaScript</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about section" id="about">
+        <div class="container section-header">
+          <span class="section-label">About Me</span>
+          <h2>Creative problem solving through web design.</h2>
+        </div>
+        <div class="container about-grid">
+          <div class="about-copy">
+            <p>
+              I bring strong visual design, clean front-end development, and a
+              user-centered focus to every project. My work combines elegant
+              layouts with micro-interactions that create an engaging digital
+              experience.
+            </p>
+            <div class="stats-grid">
+              <div class="stat">
+                <h3>5+</h3>
+                <p>Years of practice</p>
+              </div>
+              <div class="stat">
+                <h3>20+</h3>
+                <p>Projects completed</p>
+              </div>
+              <div class="stat">
+                <h3>100%</h3>
+                <p>Responsive across devices</p>
+              </div>
+            </div>
+          </div>
+          <div class="about-cards">
+            <article class="skill-card">
+              <h3>Design Systems</h3>
+              <p>Crafting visual language and reusable UI components.</p>
+            </article>
+            <article class="skill-card">
+              <h3>Interaction Design</h3>
+              <p>Animating transitions, hover effects, and dynamic states.</p>
+            </article>
+            <article class="skill-card">
+              <h3>Performance</h3>
+              <p>Optimizing HTML and CSS for fast loading and smooth rendering.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="projects section" id="projects">
+        <div class="container section-header">
+          <span class="section-label">Portfolio</span>
+          <h2>Selected work that reflects quality and innovation.</h2>
+        </div>
+        <div class="container project-grid">
+          <article class="project-card">
+            <div class="project-badge">Web App</div>
+            <h3>Interactive Dashboard</h3>
+            <p>
+              A clean analytics dashboard with responsive cards, charts, and a
+              modern UI built with HTML, CSS, and JavaScript.
+            </p>
+          </article>
+          <article class="project-card">
+            <div class="project-badge">Landing Page</div>
+            <h3>Brand Campaign Site</h3>
+            <p>
+              Designed a conversion-focused landing page with subtle animation
+              and a polished user journey.
+            </p>
+          </article>
+          <article class="project-card">
+            <div class="project-badge">UI Kit</div>
+            <h3>Component Library</h3>
+            <p>
+              Built a scalable component library for consistent styling and
+              reusable layouts across digital products.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="skills section" id="skills">
+        <div class="container section-header">
+          <span class="section-label">Skills</span>
+          <h2>Tools and technologies I use daily.</h2>
+        </div>
+        <div class="container skills-grid">
+          <div class="skill-pill">HTML</div>
+          <div class="skill-pill">CSS</div>
+          <div class="skill-pill">JavaScript</div>
+          <div class="skill-pill">Responsive Design</div>
+          <div class="skill-pill">Accessibility</div>
+          <div class="skill-pill">Animations</div>
+        </div>
+      </section>
+
+      <section class="contact section" id="contact">
+        <div class="container section-header">
+          <span class="section-label">Contact</span>
+          <h2>Let’s build something memorable together.</h2>
+        </div>
+        <div class="container contact-grid">
+          <div class="contact-copy">
+            <p>
+              Ready to start a project or discuss ideas? Send a message and I’ll
+              respond promptly.
+            </p>
+          </div>
+          <form class="contact-form" id="contactForm">
+            <label>
+              Name
+              <input type="text" name="name" placeholder="Your name" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="you@example.com" required />
+            </label>
+            <label>
+              Message
+              <textarea name="message" rows="5" placeholder="Tell me about your project" required></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit">Send Message</button>
+            <p class="form-status" id="formStatus"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© 2026 Saiket. Crafted with HTML, CSS, and JavaScript.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Page | E-commerce Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="product-styles.css" />
+  </head>
+  <body>
+    <header class="product-header">
+      <div class="product-container header-row">
+        <a href="index.html" class="brand">E-Shop</a>
+        <nav class="product-nav">
+          <a href="#details">Details</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#shipping">Shipping</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="product-main">
+      <section class="product-view product-container">
+        <div class="image-panel">
+          <div class="main-image">
+            <img src="https://images.unsplash.com/photo-1513708925884-6d00a73fd680?auto=format&fit=crop&w=900&q=80" alt="Leather crossbody bag" />
+          </div>
+          <div class="thumb-row">
+            <button class="thumb active" data-src="https://images.unsplash.com/photo-1513708925884-6d00a73fd680?auto=format&fit=crop&w=900&q=80">
+              <img src="https://images.unsplash.com/photo-1513708925884-6d00a73fd680?auto=format&fit=crop&w=200&q=60" alt="Leather bag angle" />
+            </button>
+            <button class="thumb" data-src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=900&q=80">
+              <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=200&q=60" alt="Bag styled" />
+            </button>
+            <button class="thumb" data-src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80">
+              <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=200&q=60" alt="Bag detail" />
+            </button>
+          </div>
+        </div>
+
+        <aside class="details-panel">
+          <span class="eyebrow">New arrival</span>
+          <h1>Leather Crossbody Bag</h1>
+          <p class="price">$129.00</p>
+          <p class="rating">★★★★☆ 4.8 (142 reviews)</p>
+          <p class="product-copy">
+            A versatile everyday bag crafted from premium leather with refined stitching,
+            adjustable strap, and spacious interior pockets. Ideal for modern shoppers
+            who value polished style and practical organization.
+          </p>
+
+          <div class="product-options">
+            <div class="option-group">
+              <p class="option-label">Color</p>
+              <div class="option-row">
+                <button class="option-button selected" data-value="Black">Black</button>
+                <button class="option-button" data-value="Tan">Tan</button>
+                <button class="option-button" data-value="Olive">Olive</button>
+              </div>
+            </div>
+
+            <div class="option-group">
+              <p class="option-label">Quantity</p>
+              <div class="quantity-picker">
+                <button type="button" id="decreaseQty">−</button>
+                <span id="quantityValue">1</span>
+                <button type="button" id="increaseQty">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button class="add-cart" id="addToCart">Add to Cart</button>
+            <button class="wishlist" id="addToWishlist">Add to Wishlist</button>
+          </div>
+
+          <p class="cart-feedback" id="cartFeedback"></p>
+
+          <div class="feature-grid">
+            <div>
+              <strong>Free shipping</strong>
+              <p>on orders over $75</p>
+            </div>
+            <div>
+              <strong>30-day returns</strong>
+              <p>hassle-free process</p>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="product-info product-container" id="details">
+        <div class="info-card">
+          <h2>Product Details</h2>
+          <p>
+            The leather crossbody bag is thoughtfully designed to keep essentials
+            secure while offering a lightweight carry. The interior includes a zippered
+            pocket and spacious compartment.
+          </p>
+          <ul>
+            <li>Genuine leather with premium hardware</li>
+            <li>Adjustable shoulder strap</li>
+            <li>Dimensions: 10" x 8" x 3"</li>
+            <li>Available in three classic colors</li>
+          </ul>
+        </div>
+
+        <div class="info-card" id="reviews">
+          <h2>Customer Reviews</h2>
+          <article class="review">
+            <p class="review-text">
+              "Beautiful craftsmanship and a timeless look. The bag fits everything I need."
+            </p>
+            <p class="review-meta">— Alex M.</p>
+          </article>
+          <article class="review">
+            <p class="review-text">
+              "Comfortable strap and the leather feels durable. Highly recommend for daily use."
+            </p>
+            <p class="review-meta">— Priya K.</p>
+          </article>
+        </div>
+
+        <div class="info-card" id="shipping">
+          <h2>Shipping & Returns</h2>
+          <p>
+            Standard shipping takes 3-5 business days. Orders placed before 2PM ship
+            same day. Returns are accepted within 30 days in original condition.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="product-footer">
+      <div class="product-container footer-row">
+        <p>© 2026 E-Shop. Designed for seamless shopping.</p>
+      </div>
+    </footer>
+
+    <script src="product.js"></script>
+  </body>
+</html>
