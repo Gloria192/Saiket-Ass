@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 6 - Interactive Web Application</title>
+    <style>
+      :root {
+        --bg: #07111f;
+        --panel: #101c2f;
+        --panel-2: #16253b;
+        --text: #f8fafc;
+        --muted: #9fb0c9;
+        --accent: #34d399;
+        --accent-2: #60a5fa;
+        --danger: #fb7185;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, var(--bg), #14233a);
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem 1rem 3rem;
+      }
+
+      .hero {
+        padding: 1.5rem;
+        border-radius: 20px;
+        background: rgba(16, 28, 47, 0.95);
+        border: 1px solid rgba(255,255,255,0.08);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      }
+
+      h1, h2, h3 { margin-top: 0; }
+      .muted { color: var(--muted); }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+        margin-top: 1.2rem;
+      }
+
+      .card {
+        background: rgba(16, 28, 47, 0.96);
+        border-radius: 18px;
+        padding: 1.2rem;
+        border: 1px solid rgba(255,255,255,0.08);
+      }
+
+      label { display: block; margin-bottom: 0.4rem; font-weight: 600; }
+      input, select, textarea {
+        width: 100%;
+        padding: 0.75rem 0.85rem;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: var(--panel-2);
+        color: var(--text);
+        margin-bottom: 0.85rem;
+      }
+
+      textarea { min-height: 90px; resize: vertical; }
+
+      button {
+        padding: 0.8rem 1rem;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: white;
+      }
+
+      .result {
+        padding: 1rem;
+        border-radius: 14px;
+        background: rgba(52, 211, 153, 0.13);
+        border: 1px solid rgba(52, 211, 153, 0.32);
+        margin-top: 0.8rem;
+      }
+
+      .summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+        padding: 0.8rem 1rem;
+        border-radius: 12px;
+        background: rgba(96, 165, 250, 0.12);
+      }
+
+      .pill {
+        display: inline-block;
+        padding: 0.35rem 0.6rem;
+        border-radius: 999px;
+        background: rgba(251, 113, 133, 0.18);
+        color: #fecdd3;
+        font-size: 0.86rem;
+        margin-top: 0.35rem;
+      }
+
+      @media (max-width: 800px) {
+        .grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <section class="hero">
+        <h1>Interactive Web Application</h1>
+        <p class="muted">Type a name, choose a mood, and see the experience update instantly.</p>
+      </section>
+
+      <div class="grid">
+        <div class="card">
+          <h2>Personalized Experience</h2>
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="Enter your name" />
+
+          <label for="mood">Select Mood</label>
+          <select id="mood">
+            <option value="happy">Happy</option>
+            <option value="focused">Focused</option>
+            <option value="creative">Creative</option>
+            <option value="energetic">Energetic</option>
+          </select>
+
+          <label for="goal">What do you want today?</label>
+          <textarea id="goal" placeholder="Write your goal here..."></textarea>
+
+          <button id="applyBtn">Apply Changes</button>
+          <div id="resultBox" class="result">Your personalized preview will appear here.</div>
+        </div>
+
+        <div class="card">
+          <h2>Live Dashboard</h2>
+          <div class="summary">
+            <div>
+              <strong id="welcomeText">Hello, Guest</strong>
+              <div class="pill" id="moodBadge">Mood: Happy</div>
+            </div>
+            <div id="progressText">Progress: 0%</div>
+          </div>
+
+          <label for="progress">Progress</label>
+          <input type="range" id="progress" min="0" max="100" value="40" />
+
+          <h3>Quick Suggestions</h3>
+          <ul id="tipsList"></ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const nameInput = document.getElementById('name');
+      const moodInput = document.getElementById('mood');
+      const goalInput = document.getElementById('goal');
+      const applyBtn = document.getElementById('applyBtn');
+      const resultBox = document.getElementById('resultBox');
+      const welcomeText = document.getElementById('welcomeText');
+      const moodBadge = document.getElementById('moodBadge');
+      const progressText = document.getElementById('progressText');
+      const progressInput = document.getElementById('progress');
+      const tipsList = document.getElementById('tipsList');
+
+      const moodTips = {
+        happy: ['Share your energy with others', 'Take a short walk and refresh'],
+        focused: ['Break work into small tasks', 'Set a timer for 25 minutes'],
+        creative: ['Sketch an idea quickly', 'Try a new color or layout'],
+        energetic: ['Start with the hardest task', 'Keep your momentum going']
+      };
+
+      function updateDashboard() {
+        const name = nameInput.value.trim() || 'Guest';
+        const mood = moodInput.value;
+        const goal = goalInput.value.trim() || 'an amazing day';
+        const progress = progressInput.value;
+
+        welcomeText.textContent = `Hello, ${name}`;
+        moodBadge.textContent = `Mood: ${mood.charAt(0).toUpperCase() + mood.slice(1)}`;
+        progressText.textContent = `Progress: ${progress}%`;
+
+        tipsList.innerHTML = moodTips[mood]
+          .map(tip => `<li>${tip}</li>`)
+          .join('');
+
+        resultBox.innerHTML = `
+          <strong>Preview:</strong><br>
+          You are feeling <b>${mood}</b> and aiming to ${goal}.<br>
+          Your current progress is <b>${progress}%</b>.
+        `;
+      }
+
+      applyBtn.addEventListener('click', updateDashboard);
+      [nameInput, moodInput, goalInput, progressInput].forEach(input => {
+        input.addEventListener('input', updateDashboard);
+      });
+
+      updateDashboard();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 4 - HTML Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        margin: 0;
+        padding: 2rem;
+        color: #222;
+      }
+
+      .container {
+        max-width: 700px;
+        margin: auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        color: #1e3a8a;
+      }
+
+      form {
+        display: grid;
+        gap: 1rem;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      input, select, textarea {
+        width: 100%;
+        padding: 0.7rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+
+      .inline-group {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .inline-group div {
+        flex: 1;
+        min-width: 180px;
+      }
+
+      button {
+        padding: 0.8rem 1.2rem;
+        background: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #1d4ed8;
+      }
+
+      .note {
+        font-size: 0.9rem;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Contact Us</h1>
+      <p class="note">Please fill out the form below. All required fields are marked.</p>
+
+      <form action="#" method="post">
+        <div class="inline-group">
+          <div>
+            <label for="fullname">Full Name *</label>
+            <input type="text" id="fullname" name="fullname" required />
+          </div>
+          <div>
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+        </div>
+
+        <div>
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" />
+        </div>
+
+        <div>
+          <label>Preferred Contact Method</label>
+          <div>
+            <input type="radio" id="emailMethod" name="contactMethod" value="Email" checked />
+            <label for="emailMethod">Email</label>
+          </div>
+          <div>
+            <input type="radio" id="phoneMethod" name="contactMethod" value="Phone" />
+            <label for="phoneMethod">Phone</label>
+          </div>
+        </div>
+
+        <div>
+          <label for="interest">What are you interested in?</label>
+          <select id="interest" name="interest">
+            <option value="">Choose one</option>
+            <option value="product">Product Inquiry</option>
+            <option value="support">Support</option>
+            <option value="feedback">Feedback</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Topics</label>
+          <div>
+            <input type="checkbox" id="updates" name="topics" value="Updates" />
+            <label for="updates">Updates</label>
+          </div>
+          <div>
+            <input type="checkbox" id="offers" name="topics" value="Offers" />
+            <label for="offers">Offers</label>
+          </div>
+          <div>
+            <input type="checkbox" id="news" name="topics" value="News" />
+            <label for="news">News</label>
+          </div>
+        </div>
+
+        <div>
+          <label for="message">Message *</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </body>
+</html>

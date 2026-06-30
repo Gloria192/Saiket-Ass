@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 5 - Blogging Platform</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --panel: #111827;
+        --panel-2: #1f2937;
+        --text: #f8fafc;
+        --muted: #94a3b8;
+        --accent: #38bdf8;
+        --accent-2: #8b5cf6;
+        --border: rgba(148, 163, 184, 0.25);
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, var(--bg), #1e293b);
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      .shell {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem 3rem;
+      }
+
+      header {
+        margin-bottom: 1.5rem;
+      }
+
+      .hero {
+        background: rgba(17, 24, 39, 0.9);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 1.5rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      h1, h2, h3 { margin-top: 0; }
+      .muted { color: var(--muted); }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 1.5rem;
+      }
+
+      .card {
+        background: rgba(17, 24, 39, 0.95);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 1.2rem;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      form { display: grid; gap: 0.9rem; }
+      label { font-weight: 600; }
+      input, select, textarea {
+        width: 100%;
+        padding: 0.8rem 0.9rem;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: var(--panel-2);
+        color: var(--text);
+      }
+
+      textarea { min-height: 120px; resize: vertical; }
+
+      .row { display: flex; gap: 1rem; flex-wrap: wrap; }
+      .row > * { flex: 1; min-width: 180px; }
+
+      button {
+        padding: 0.8rem 1rem;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      .primary-btn {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: white;
+      }
+
+      .secondary-btn {
+        background: #334155;
+        color: white;
+      }
+
+      .stats {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+      }
+
+      .stat-pill {
+        background: rgba(56, 189, 248, 0.15);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        border-radius: 999px;
+        padding: 0.45rem 0.7rem;
+        font-size: 0.9rem;
+      }
+
+      .post-list {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .post {
+        background: rgba(30, 41, 59, 0.9);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1rem;
+      }
+
+      .post-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.75rem;
+        align-items: center;
+        margin-bottom: 0.75rem;
+      }
+
+      .post-title { margin: 0; font-size: 1.1rem; }
+      .badge {
+        display: inline-block;
+        padding: 0.3rem 0.6rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        background: rgba(139, 92, 246, 0.2);
+        color: #ddd6fe;
+      }
+
+      .post-actions {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 0.8rem;
+      }
+
+      .tiny-btn {
+        padding: 0.5rem 0.7rem;
+        font-size: 0.85rem;
+        background: #334155;
+        color: white;
+      }
+
+      .empty {
+        text-align: center;
+        padding: 1.5rem;
+        color: var(--muted);
+        border: 1px dashed var(--border);
+        border-radius: 14px;
+      }
+
+      @media (max-width: 900px) {
+        .layout { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="hero">
+        <h1>Blogging Platform</h1>
+        <p class="muted">Create, edit, and publish blog posts with a simple and interactive dashboard.</p>
+        <div class="stats">
+          <span class="stat-pill" id="totalPosts">Posts: 0</span>
+          <span class="stat-pill" id="publishedPosts">Published: 0</span>
+          <span class="stat-pill" id="draftPosts">Drafts: 0</span>
+        </div>
+      </header>
+
+      <div class="layout">
+        <section class="card">
+          <h2 id="formTitle">Write a New Post</h2>
+          <form id="blogForm">
+            <input type="hidden" id="postId" />
+            <div class="row">
+              <div>
+                <label for="title">Post Title</label>
+                <input type="text" id="title" placeholder="Enter blog title" required />
+              </div>
+              <div>
+                <label for="author">Author</label>
+                <input type="text" id="author" placeholder="Your name" required />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="category">Category</label>
+                <select id="category">
+                  <option value="Tech">Tech</option>
+                  <option value="Lifestyle">Lifestyle</option>
+                  <option value="Education">Education</option>
+                  <option value="Travel">Travel</option>
+                </select>
+              </div>
+              <div>
+                <label for="status">Status</label>
+                <select id="status">
+                  <option value="Draft">Draft</option>
+                  <option value="Published">Published</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="content">Content</label>
+              <textarea id="content" placeholder="Write your blog content here..." required></textarea>
+            </div>
+
+            <div class="row">
+              <button type="submit" class="primary-btn">Save Post</button>
+              <button type="button" id="cancelEdit" class="secondary-btn">Cancel Edit</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2>Recent Posts</h2>
+          <div id="postList" class="post-list"></div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const storageKey = 'task5-blog-posts';
+      const form = document.getElementById('blogForm');
+      const postList = document.getElementById('postList');
+      const formTitle = document.getElementById('formTitle');
+      const cancelEditBtn = document.getElementById('cancelEdit');
+      const postIdInput = document.getElementById('postId');
+      const titleInput = document.getElementById('title');
+      const authorInput = document.getElementById('author');
+      const categoryInput = document.getElementById('category');
+      const statusInput = document.getElementById('status');
+      const contentInput = document.getElementById('content');
+
+      let posts = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+      function savePosts() {
+        localStorage.setItem(storageKey, JSON.stringify(posts));
+        renderPosts();
+        updateStats();
+      }
+
+      function updateStats() {
+        document.getElementById('totalPosts').textContent = `Posts: ${posts.length}`;
+        document.getElementById('publishedPosts').textContent = `Published: ${posts.filter(post => post.status === 'Published').length}`;
+        document.getElementById('draftPosts').textContent = `Drafts: ${posts.filter(post => post.status === 'Draft').length}`;
+      }
+
+      function renderPosts() {
+        if (!posts.length) {
+          postList.innerHTML = '<div class="empty">No posts yet. Start by creating your first story.</div>';
+          return;
+        }
+
+        postList.innerHTML = posts
+          .slice()
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          .map(post => `
+            <article class="post">
+              <div class="post-head">
+                <div>
+                  <h3 class="post-title">${post.title}</h3>
+                  <p class="muted">By ${post.author} • ${post.category}</p>
+                </div>
+                <span class="badge">${post.status}</span>
+              </div>
+              <p>${post.content}</p>
+              <div class="post-actions">
+                <button type="button" class="tiny-btn" onclick="editPost('${post.id}')">Edit</button>
+                <button type="button" class="tiny-btn" onclick="publishPost('${post.id}')">Publish</button>
+                <button type="button" class="tiny-btn" onclick="deletePost('${post.id}')">Delete</button>
+              </div>
+            </article>
+          `).join('');
+      }
+
+      function resetForm() {
+        form.reset();
+        postIdInput.value = '';
+        formTitle.textContent = 'Write a New Post';
+        categoryInput.value = 'Tech';
+        statusInput.value = 'Draft';
+      }
+
+      window.editPost = function (id) {
+        const post = posts.find(item => item.id === id);
+        if (!post) return;
+        postIdInput.value = post.id;
+        titleInput.value = post.title;
+        authorInput.value = post.author;
+        categoryInput.value = post.category;
+        statusInput.value = post.status;
+        contentInput.value = post.content;
+        formTitle.textContent = 'Edit Post';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      window.publishPost = function (id) {
+        posts = posts.map(post => post.id === id ? { ...post, status: 'Published', updatedAt: new Date().toISOString() } : post);
+        savePosts();
+      };
+
+      window.deletePost = function (id) {
+        posts = posts.filter(post => post.id !== id);
+        savePosts();
+        if (postIdInput.value === id) resetForm();
+      };
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const postData = {
+          id: postIdInput.value || crypto.randomUUID(),
+          title: titleInput.value.trim(),
+          author: authorInput.value.trim(),
+          category: categoryInput.value,
+          status: statusInput.value,
+          content: contentInput.value.trim(),
+          createdAt: postIdInput.value ? posts.find(post => post.id === postIdInput.value)?.createdAt : new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+
+        if (!postData.title || !postData.author || !postData.content) return;
+
+        if (postIdInput.value) {
+          posts = posts.map(post => post.id === postData.id ? postData : post);
+        } else {
+          posts.unshift(postData);
+        }
+
+        savePosts();
+        resetForm();
+      });
+
+      cancelEditBtn.addEventListener('click', resetForm);
+      updateStats();
+      renderPosts();
+    </script>
+  </body>
+</html>
